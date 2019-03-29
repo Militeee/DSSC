@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <omp.h>
-#define N 10000000
+#define N 100000000
 
 
 double f(double x){
