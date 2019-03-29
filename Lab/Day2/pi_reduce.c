@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <omp.h>
-#define N 100000000
+#define N 10000000
 
 
 double f(double x){
@@ -27,6 +27,6 @@ int main( int argc, char * argv[] ) {
     }
     double tend = omp_get_wtime();
 
-    printf("pi=%f time=%fsec \n",h*global_result*4,tstart - tend);
+    printf("pi=%f time=%fsec \n",h*global_result*4, tend-tstart);
     return 0;
 }

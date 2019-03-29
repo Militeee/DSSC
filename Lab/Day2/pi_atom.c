@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <omp.h>
-#define N 100000000
+#define N 10000000
 
 
 double f(double x){
@@ -22,12 +22,12 @@ int main( int argc, char * argv[] ) {
         #pragma omp for
         for(i = 1; i < N; i++){
             double x_i = i*h;
-	    #pragma omp atom
-            global_result += f(x_i);
+	        #pragma omp atomic
+            global_result += f(x_i); //I know that the function is thread-safe
         }
     }
     double tend = omp_get_wtime();
 
-    printf("pi=%f time=%fsec \n",h*global_result*4,tstart - tend);
+    printf("pi=%f time=%fsec \n",h*global_result*4, tend-tstart);
     return 0;
 }
