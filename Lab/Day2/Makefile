@@ -1,11 +1,18 @@
-all:	loop.x pi.x
-	
+all:	loop.x pi_atom.x pi_crit.x pi_reduce.x
+
 
 loop.x:
 	gcc loop_schedule.c -o loop.x -fopenmp
 
-pi.x:
-	gcc pi_par.c -o pi.x -fopenmp
+pi_atom.x:
+	gcc pi_atom.c -o pi_atom.x -fopenmp
+
+pi_crit.x:
+	gcc pi_crit.c -o pi_crit.x -fopenmp
+
+pi_reduce.x:
+	gcc pi_reduce.c -o pi_reduce.x -fopenmp
+
 
 clean:
 	rm approx_pi.x pi.x
