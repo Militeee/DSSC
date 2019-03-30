@@ -17,14 +17,17 @@ int main( int argc, char * argv[] ) {
     double global_result=0.0;
     double h = 1./N;
     int i;
-    #pragma omp parallel  num_threads(threads)
+    #pragma omp parallel num_threads(threads) private(i)
     {
-        #pragma omp for
+        double partial=0;
+        #pragma omp for 
         for(i = 1; i < N; i++){
             double x_i = i*h;
-	    #pragma omp critical
-            global_result += f(x_i);
+            partial += f(x_i);
+             //I know that the function is thread-safe
         }
+        #pragma omp critical
+        global_result += partial;
     }
     double tend = omp_get_wtime();
 

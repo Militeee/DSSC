@@ -5,13 +5,13 @@ loop.x:
 	gcc loop_schedule.c -o loop.x -fopenmp
 
 pi_atom.x:
-	gcc pi_atom.c -o pi_atom.x -fopenmp
+	gcc -O3 pi_atom.c -o pi_atom.x -fopenmp
 
 pi_crit.x:
-	gcc pi_crit.c -o pi_crit.x -fopenmp
+	gcc -O3 pi_crit.c -o pi_crit.x -fopenmp
 
 pi_reduce.x:
-	gcc pi_reduce.c -o pi_reduce.x -fopenmp
+	gcc -O3 pi_reduce.c -o pi_reduce.x -fopenmp
 
 
 clean:

@@ -1,0 +1,23 @@
+---
+title: "pi_charts"
+author: "Salvatore Milite"
+date: "30 March 2019"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+```
+
+## Plots for paralle pi calculation
+We can ssee how the problem scales well with the number of processor even though with 20 processor we see an increase in the time (due for instance to memory bandwith saturation). Regarding the differrence in implementation, it is evident that declaring the global result critical is the worst choiche for performance (as a matter of fact this pragma is software implemented and is conceived for longer chunks of instructions), while the keywords atomic and reduce are hardware implemented and more optimized for this simple type of operations. Reduce, however, is highly optimized and seems to be the better choice in this setting.
+
+
+
+```{r plots, include = FALSE}
+
+
+
+```
+
