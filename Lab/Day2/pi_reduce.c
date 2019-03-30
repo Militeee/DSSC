@@ -22,7 +22,6 @@ int main( int argc, char * argv[] ) {
         #pragma omp for
         for(i = 1; i < N; i++){
             double x_i = i*h;
-	        #pragma omp atomic
             global_result += f(x_i);
         }
     }

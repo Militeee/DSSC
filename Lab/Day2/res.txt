@@ -1,24 +1,24 @@
-#1
-Reduction	pi=3.141593 time=1.419155sec 
-Atomic 	pi=3.141593 time=1.427498sec 
-Critical 	pi=3.141593 time=1.615230sec 
+Reduce	pi=3.141593 time=4.454248sec 
+Atomic	pi=3.141593 time=4.541352sec 
+Critical	pi=3.141593 time=4.454232sec 
 #2
-Reduction	pi=3.141593 time=0.717897sec 
-Atomic 	pi=3.141593 time=2.854842sec 
-Critical 	pi=3.141593 time=13.501946sec 
+Reduce	pi=3.141593 time=2.266569sec 
+Atomic	pi=3.141593 time=2.263000sec 
+Critical	pi=3.141593 time=2.275810sec 
 #4
-Reduction	pi=3.141593 time=0.373778sec 
-Atomic 	pi=3.141593 time=7.580040sec 
-Critical 	pi=3.141593 time=38.646106sec 
+Reduce	pi=3.141593 time=1.168957sec 
+Atomic	pi=3.141593 time=1.167542sec 
+Critical	pi=3.141593 time=1.176068sec 
 #8
-Reduction	pi=3.141593 time=0.196544sec 
-Atomic 	pi=3.141593 time=6.515369sec 
-Critical 	pi=3.141593 time=51.117276sec 
+Reduce	pi=3.141593 time=0.622479sec 
+Atomic	pi=3.141593 time=0.691801sec 
+Critical	pi=3.141593 time=0.613283sec 
 #16
-Reduction	pi=3.141593 time=0.103376sec 
-Atomic 	pi=3.141593 time=13.016800sec 
-Critical 	pi=3.141593 time=73.631843sec 
+Reduce	pi=3.141593 time=0.363830sec 
+Atomic	pi=3.141593 time=0.323603sec 
+Critical	pi=3.141593 time=0.323590sec 
 #20
-Reduction	pi=3.141593 time=0.213536sec 
-Atomic 	pi=3.141593 time=7.777142sec 
-Critical 	pi=3.141593 time=87.724053sec 
+Reduce	pi=3.141593 time=0.458306sec 
+Atomic	pi=3.141593 time=0.443904sec 
+Critical	pi=3.141593 time=0.440112sec 
+
