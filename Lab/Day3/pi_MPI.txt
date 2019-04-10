@@ -1,0 +1,20 @@
+#1
+#2
+#4
+#8
+#16
+#20
+#32
+#40
+#1
+#2
+#4
+#6
+#8
+#10
+#15
+#20
+cn02-01 : flushing filesystem cache...
+cn02-02 : flushing filesystem cache...
+cn02-01 : filesystem cache flushed
+cn02-02 : filesystem cache flushed

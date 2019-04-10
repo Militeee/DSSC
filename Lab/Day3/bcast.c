@@ -37,25 +37,31 @@
 
 // Header file for compiling code including MPI APIs
 #include <mpi.h>
-
+#define N 250000000
 
 int main( int argc, char * argv[] ){
 
   int imesg = 0;
   int rank = 0; // store the MPI identifier of the process
   int npes = 1; // store the number of MPI processes
-
+  int* O = (int*)malloc(sizeof(int) * N);;
+int i;
   MPI_Init( &argc, &argv );
   MPI_Comm_rank( MPI_COMM_WORLD, &rank );
   MPI_Comm_size( MPI_COMM_WORLD, &npes );
 
+  if(rank == 0)
+    {
+      for(i = 0; i < N; i++ )
+	O[i] = -npes;
+    }
   imesg = rank;
   fprintf( stderr, "\nBefore Bcast operation I am process %d of %d MPI processes and my message content is: %d\n", rank, npes, imesg );
 
-  MPI_Bcast( &imesg, 1, MPI_INT, 0, MPI_COMM_WORLD );
+  MPI_Bcast( O, N, MPI_INT, 0, MPI_COMM_WORLD );
 
-  fprintf( stderr, "\nAfter Bcast operation I am process %d of %d MPI processes and my message content is: %d\n", rank, npes, imesg );
-
+  fprintf( stderr, "\nAfter Bcast operation I am process %d of %d MPI processes and my message content is: %d\n", rank, npes,O[N-1]);
+   free(O);
   MPI_Finalize();
   
   return 0;
