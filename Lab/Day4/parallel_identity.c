@@ -24,7 +24,12 @@ void fprint_matrix(double* M, int row, int col, FILE* fp){
   }
  }
 
+void swap(double** x, double** y){
 
+  double* tmp = *x;
+  *x = *y;
+  *y = tmp;
+}
 
 int main( int argc, char * argv[] ) {
  
@@ -59,23 +64,20 @@ int main( int argc, char * argv[] ) {
     MPI_Status status;
     int size;
     int size_print;
-    double* tmp;
-    double* tmp2;
     f = fopen("matrix_res.txt","w");
     for(int i = 1; i < nproc+1; i++)
     {
       size_print = i == 1 ? Nsize : size;
-      tmp = i % 2 == 0 ? Mat : Buff;
-      tmp2 = i % 2 == 0 ? Buff : Mat; 
       if(i < rest || rest == 0) size = Nsize;
       else size = Nsize-1;
       if(i != nproc)
-	MPI_Irecv(tmp, size * N, MPI_DOUBLE, i, 101, MPI_COMM_WORLD,&irreq);
-      if(N < 10) print_matrix(tmp2,size_print,N);
+	MPI_Irecv(Buff, size * N, MPI_DOUBLE, i, 101, MPI_COMM_WORLD,&irreq);
+      if(N < 10) print_matrix(Mat,size_print,N);
       else
-	fprint_matrix(tmp2,size_print,N,f);
+	fprint_matrix(Mat,size_print,N,f);
       if(i != nproc)
         MPI_Wait(&irreq,&status);
+      swap(&Mat,&Buff);
     }
     if(N > 10) fclose(f);
 }
