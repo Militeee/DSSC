@@ -1,0 +1,58 @@
+---
+title: "pi_charts"
+author: "Salvatore Milite"
+date: "30 March 2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(readr)
+res <- read_table2("/home/salvatore/university/DSSC/Lab/res.txt", 
+    col_types = cols(X4 = col_skip()), comment = "#", col_names = FALSE)
+res <- apply(res, 2, strsplit, "=")
+data <- data.frame(1:18,1:18)
+data[1] <- sapply(res[[1]], function(x)x[1])
+data[2] <- sapply(res[[3]], function(x)x[2])
+names(data) <- c("Implementation","Time")
+data[2] <- sapply(data[2], strtrim, 6)
+data[2] <- sapply(data[2], as.numeric)
+
+```
+
+## Plots for OMP parallel pi calculation
+We can see how the problem scales well (with 10^10 points) with the number of processors (except for 20 processors where, for instance, memory bandwidth saturation can lead to not so-good results), nevertheless my implementation uses a auxiliary structure for storing the per-threads partial value of the summationa, in that way the number of accesses to the global variable is equal to the number of processors. In this setting, given the lower number of critical operations, the difference between the three implementations is not that much. 
+
+
+
+```{r plots, echo = FALSE}
+library(ggplot2)
+Nproc <- c(1,1,1,2,2,2,4,4,4,8,8,8,16,16,16,20,20,20)
+ggplot(aes(y=Time, x = Nproc ,color=Implementation), data = data) + geom_line() +geom_point() + scale_color_discrete(labels=c("Atomic", "Critical","Reduce")) + ggtitle("OMP pi calculation with 10^10 points") + ylab("Time[sec]")+ xlab("#Processors")
+
+
+```
+
+
+## Plots for MPI parallel pi calculation
+
+Here we have implemented the same pi calculus using quadrature as above, but now parallelizing the code either with the MPI protocol or by a hybrid approach. We have also included in the plot the reduced implementation in OMP (for the first 20 processes/thread). Here we can see how the OMP is generally faster, indeed it does not have to pass messages and has a minor hoverhead. However, it can't be used with more than one node. Nevertheless, is clear how the problem continues to scale with more MPI processes (but slowly, at least for this dimension). The hybrid approach seems not to be significantly better than the pure MPI (to be honest only some fraction of seconds faster), but also in this case, the situation may change we we have more nodes and the communication starts to be very intensive.
+```{r plots2, echo = FALSE, warning=FALSE, message=FALSE}
+library(tidyr)
+Hybrid <- read_table2("/home/salvatore/university/DSSC/Lab/res2.txt",
+                    comment = "#", col_names = FALSE, col_types = NULL)[,1]
+MPI <- read_table2("/home/salvatore/university/DSSC/Lab/res3.txt", comment = "#", col_types = NULL,col_names = FALSE) [,1]
+
+Hybrid <- rbind(NA,Hybrid)
+Nproc2 <- rep(c(1,2,4,8,16,20,32,40),3)
+
+OMP <- data[which(data$Implementation == "reduce"),] [,2]
+OMP <- c(OMP,NA,NA)
+plot_df <- data.frame(Hybrid,MPI,OMP)
+names(plot_df) <- c("Hybrid", "MPI", "OMP")
+plot_df <- gather(plot_df )
+names(plot_df) <- c("Implementation", "Time")
+ggplot(aes(x=Nproc2, y =  Time ,color=Implementation), data = plot_df) + geom_line() +geom_point() + ggtitle("pi calculation with 10^10 points") + ylab("Time[sec]") + xlab("#Processors")
+
+```
+
