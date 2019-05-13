@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <omp.h>
-#define N 1000000000
+#define N 10000000000
 
 
 double f(double x){
@@ -16,13 +16,13 @@ int main( int argc, char * argv[] ) {
     else threads = atoi(argv[1]);
     double global_result=0.0;
     double h = 1./N;
-    int i;
+    long int i;
     #pragma omp parallel num_threads(threads) private(i)
     {
         double partial=0;
         #pragma omp for 
-        for(i = 1; i < N; i++){
-            double x_i = i*h;
+        for(i = 0; i < N; i++){
+            double x_i = i*h+h/2.0;
             partial += f(x_i);
              //I know that the function is thread-safe
         }

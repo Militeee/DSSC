@@ -39,12 +39,15 @@ int main( int argc, char * argv[] ) {
   MPI_Init( &argc, &argv );
   MPI_Comm_rank( MPI_COMM_WORLD, &rank );
   MPI_Comm_size( MPI_COMM_WORLD, &nproc );
+  // adjust for the rest
   int Nsize = N/nproc;
   int rest = N%nproc;
   if(rank < rest ) Nsize++;
   int g_idx;
+  // create a global index
   if(rank < rest ) g_idx = rank * Nsize;
   else g_idx = (rank - rest) * Nsize + rest * (Nsize+1) ;
+  // I'm using a buffer to alternate writing and reading
   double* Buff;
   if(rank == 0) Buff = (double*) malloc (sizeof(double) * N * Nsize);
   int l_idx = 0;
@@ -65,20 +68,27 @@ int main( int argc, char * argv[] ) {
     int size;
     int size_print;
     f = fopen("matrix_res.txt","w");
-    for(int i = 1; i < nproc+1; i++)
+    // receive the message, write in the meanwhile and exchange the pointers
+    for(int i = 1; i < nproc; i++)
     {
       size_print = i == 1 ? Nsize : size;
       if(i < rest || rest == 0) size = Nsize;
       else size = Nsize-1;
-      if(i != nproc)
-	MPI_Irecv(Buff, size * N, MPI_DOUBLE, i, 101, MPI_COMM_WORLD,&irreq);
+      MPI_Irecv(Buff, size * N, MPI_DOUBLE, i, 101, MPI_COMM_WORLD,&irreq);
       if(N < 10) print_matrix(Mat,size_print,N);
       else
 	fprint_matrix(Mat,size_print,N,f);
-      if(i != nproc)
-        MPI_Wait(&irreq,&status);
+      MPI_Wait(&irreq,&status);
       swap(&Mat,&Buff);
     }
+    // I have to do another print iteration, to manage the last communication
+    size_print = i == 1 ? Nsize : size;
+    if(i < rest || rest == 0) size = Nsize;
+    else size = Nsize-1;
+    if(N < 10) print_matrix(Mat,size_print,N);
+    else
+      fprint_matrix(Mat,size_print,N,f);
+    
     if(N > 10) fclose(f);
 }
   free(Mat); 

@@ -1,5 +1,5 @@
 #!/bin/bash
-cd ./my_fork/Lab/Day2
+#cd ./my_fork/Lab/Day2
 
 for i in 1 2 4 8 16 20; do
 	echo \#$i
