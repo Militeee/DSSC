@@ -33,7 +33,8 @@ int main( int argc, char * argv[] ) {
   for(int i = 0; i < N; i++){
     sum[i] += my[i];
   }
-  printf("sum is %d\n", sum[0]);
+  if(rank < 6)
+  	printf("sum is %d\n", sum[0]);
   MPI_Finalize();  
   free(my); free(sum); free(recv);
   return 0;

@@ -82,12 +82,11 @@ int main( int argc, char * argv[] ) {
       swap(&Mat,&Buff);
     }
     // I have to do another print iteration, to manage the last communication
-    size_print = i == 1 ? Nsize : size;
-    if(i < rest || rest == 0) size = Nsize;
-    else size = Nsize-1;
-    if(N < 10) print_matrix(Mat,size_print,N);
+    if(rest == 0) size = Nsize;
+    else size = Nsize - 1;
+    if(N < 10) print_matrix(Mat,size,N);
     else
-      fprint_matrix(Mat,size_print,N,f);
+      fprint_matrix(Mat,size,N,f);
     
     if(N > 10) fclose(f);
 }
