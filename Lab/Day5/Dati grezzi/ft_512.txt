@@ -1,0 +1,61 @@
+Correct fast
+Time fast= 18.549919
+Bandwidth fast= 57.883908
+Correct naive
+Time naive = 66.454147
+Bandwidth naive= 16.157635
+Correct fast
+Time fast= 9.279872
+Bandwidth fast= 115.706536
+Correct naive
+Time naive = 66.465599
+Bandwidth naive= 16.154851
+Correct fast
+Time fast= 9.460800
+Bandwidth fast= 113.493768
+Correct naive
+Time naive = 66.283966
+Bandwidth naive= 16.199119
+Correct fast
+Time fast= 9.569664
+Bandwidth fast= 112.202664
+Correct naive
+Time naive = 66.645859
+Bandwidth naive= 16.111156
+Correct fast
+Time fast= 9.658752
+Bandwidth fast= 111.167752
+Correct naive
+Time naive = 66.493950
+Bandwidth naive= 16.147963
+Correct fast
+Time fast= 9.492160
+Bandwidth fast= 113.118808
+Correct naive
+Time naive = 66.346947
+Bandwidth naive= 16.183741
+Correct fast
+Time fast= 9.666112
+Bandwidth fast= 111.083112
+Correct naive
+Time naive = 66.321983
+Bandwidth naive= 16.189833
+Correct fast
+Time fast= 9.572640
+Bandwidth fast= 112.167776
+Correct naive
+Time naive = 66.424957
+Bandwidth naive= 16.164735
+Correct fast
+Time fast= 9.636544
+Bandwidth fast= 111.423952
+Correct naive
+Time naive = 66.436737
+Bandwidth naive= 16.161869
+Correct fast
+Time fast= 9.513152
+Bandwidth fast= 112.869192
+Correct naive
+Time naive = 66.383553
+Bandwidth naive= 16.174817
+

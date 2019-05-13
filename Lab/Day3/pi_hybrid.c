@@ -29,7 +29,8 @@ int main( int argc, char * argv[] ) {
   if(rank + 1 == npes && N%npes != 0) end = N%npes + N/npes * (rank+1);
   else end = N/npes * (rank + 1);
   long int i;
-  double local=0;  
+  double local=0;
+  // spawn the threads in each process  
   #pragma omp parallel num_threads(threads) 
 {
   double local2 = 0;
