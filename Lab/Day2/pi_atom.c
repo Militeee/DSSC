@@ -22,7 +22,6 @@ int main(int argc, char *argv[]) {
     for (i = 0; i < N; i++) {
       double x_i = i * h + h / 2;
       partial += f(x_i);
-      // I know that the function is thread-safe
     }
 #pragma omp atomic
     global_result += partial;
