@@ -7,7 +7,7 @@ void print_matrix(double *M, int row, int col) {
 
   for (int i = 0; i < row; i++) {
     for (int j = 0; j < col; j++)
-      printf("%f\t", M[i * col + j]);
+      printf("%.0f\t", M[i * col + j]);
     printf("\n");
   }
 }
@@ -68,12 +68,12 @@ int main(int argc, char *argv[]) {
     FILE *f;
     MPI_Request irreq;
     MPI_Status status;
-    int size;
+    int size = Nsize;
     int size_print;
     f = fopen("matrix_res.txt", "w");
     // receive the message, write in the meanwhile and exchange the pointers
     for (int i = 1; i < nproc; i++) {
-      size_print = i == 1 ? Nsize : size;
+      size_print = size;
       if (i < rest || rest == 0)
         size = Nsize;
       else
