@@ -24,6 +24,7 @@ We can see how block sizes in the middle performs better, with 512 as the fastes
 
 After reading a paper of Nvidia about optimizing the transpose (http://www.cs.colostate.edu/~cs675/MatrixTranspose.pdf) I have tried to test their optimization and get a sort of "upper bound" on optimization. What is different are some optimization created specifically on the hardware peculiarity of the GPU. The three main further optimization on this code (that you can find under "fast _transpose2.cu", and the data in "summary2.txt and times2.txt") are:
 
+- Explicit transposition in the shared memory
 - Use of padding for tile column dimension (in fact the gpu shared memory has (at least in some models) 16 banks such that contiguous words belongs to successive different bank, that can be accessed in parallel by an half warp. So if I have  to access to data 16-strided I end up in the same memory bank and I have to serialize the request)
 - They use less thread than the tile size, and let a thread do more than one operation, this works because the overhead of the operation is less than calculate a new set of index for the thread
 - Using diagonal indexes (In fact this trick help us to access different partition (6 or 8) of the main memory that can be used in parallel both when reading and writing)
