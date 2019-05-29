@@ -10,13 +10,13 @@ The results are summarized in these two plots, here I've chosen the median as a 
 
 The median time of the naive algorithm is ~66.4. Here we have a speedup of almost 7
 
-![](/home/salvatore/university/DSSC/Lab/Day5/Images/Time_plot.png)
+![](./Images/Time_plot.png)
 
  ### Bandwidth
 
 The median bandwidth for the naive implementation is ~16.1
 
-![](/home/salvatore/university/DSSC/Lab/Day5/Images/band_plot.png)
+![](./Images/band_plot.png)
 
 
 
@@ -34,6 +34,6 @@ r comparing the best performance of both the algorithms.
 
 ### Nvidia transpose results
 
-![](/home/salvatore/university/DSSC/Lab/Day5/Images/time2.png)
+![](./Images/time2.png)
 
-![](/home/salvatore/university/DSSC/Lab/Day5/Images/band2.png)
+![](./Images/band2.png)
