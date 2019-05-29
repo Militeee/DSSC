@@ -5,6 +5,12 @@
 #define RIGHT(proc, nproc) (proc - 1 + nproc) % nproc
 #define LEFT(proc, nproc) (proc + 1 + nproc) % nproc
 
+void swap(int** x, int** y){
+  int* tmp = *x;
+  *x = *y;
+  *y = tmp;
+}
+
 int main(int argc, char *argv[]) {
   int rank = 0;
   int npes = 1;
@@ -28,7 +34,7 @@ int main(int argc, char *argv[]) {
              MPI_STATUS_IGNORE);
     MPI_Wait(&request, MPI_STATUS_IGNORE);
     // change the pointers to propagate the sum
-    my = recv;
+    swap(&my,&recv);
   }
   // doing the last sum
   for (int i = 0; i < N; i++) {
