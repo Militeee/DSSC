@@ -32,7 +32,6 @@ int main(int argc, char *argv[]) {
     }
     MPI_Recv(recv, N, MPI_INT, RIGHT(rank, npes), 101, MPI_COMM_WORLD,
              MPI_STATUS_IGNORE);
-    MPI_Wait(&request, MPI_STATUS_IGNORE);
     // change the pointers to propagate the sum
     swap(&my,&recv);
   }
