@@ -1,6 +1,6 @@
 exe:
 	nvcc -O3 fast_transpose.cu -o fast_transpose.x
-	nvcc -O3 fast_transpose.cu -o fast2_transpose.x
+	nvcc -O3 fast_transpose2.cu -o fast2_transpose.x
 all:
 	make exe
 	nvcc -O3 Test/fast_transpose_64.cu -o Test/fast_transpose_64.x
