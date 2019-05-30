@@ -9,8 +9,8 @@ int main(int argc, char *argv[]) {
   double h = 1. / N;
   double approx = 0;
   int i;
-  for (i = 1; i < N; i++) {
-    double x_i = i * h;
+  for (i = 0; i < N; i++) {
+    double x_i = i * h + h/2;
     approx += f(x_i);
   }
   printf("%f \n", h * approx * 4);
